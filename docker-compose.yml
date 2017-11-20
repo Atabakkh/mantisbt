@@ -1,0 +1,31 @@
+version: '2'
+
+volumes:
+    mantisbugtracker:
+        driver: local
+
+services:
+###########################
+# Setup the mantis container
+###########################
+  mantisbt:
+    build: ./
+    ports:
+      - "8989:80"
+    links:
+      - mysql
+    restart: always
+
+###########################
+# Setup the mysql container
+###########################
+  mysql:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: bugtracker
+      MYSQL_USER: mantisbt
+      MYSQL_PASSWORD: mantisbt
+    restart: always
+
+
