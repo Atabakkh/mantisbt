@@ -21,13 +21,19 @@ services:
 ###########################
   mysql:
     image: mysql:latest
-    ports: 
-      - "3309:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: bugtracker
-      MYSQL_USER: mantisbt
-      MYSQL_PASSWORD: mantisbt
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=bugtracker
+      - MYSQL_USER=mantis
+      - MYSQL_PASSWORD=mantis
     restart: always
 
-
+###########################
+# Setup the postgres container
+###########################  
+  postgres:
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+    restart: always
